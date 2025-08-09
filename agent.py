@@ -1,7 +1,7 @@
 import dspy
 from config import LLM_API_BASE, LLM_API_KEY
-from ai_itmo_qa.data.ydb_adapter import YDBAdapter
-from ai_itmo_qa.embeddings import encode_query
+from data.ydb_adapter import YDBAdapter
+from embeddings import encode_query
 
 lm = dspy.LM(
     "openai/gemini-2.5-flash",
@@ -36,12 +36,11 @@ class RAG(dspy.Module):
             query_embedding, "ai_product_manager"
         )
 
-        engineer_context = "\n".join([article.article_text for article in retrieved_articles_engineer])
-        manager_context = "\n".join([article.article_text for article in retrieved_articles_manager])
+        # Combine results from both searches
+        all_retrieved_articles = retrieved_articles_engineer + retrieved_articles_manager
+        
+        context = [article.article_text for article in all_retrieved_articles]
+        context = "\n".join(context)
 
-        prediction = self.generate_answer(
-            engineer_context=engineer_context,
-            manager_context=manager_context,
-            question=question
-        )
+        prediction = self.generate_answer(context=context, question=question)
         return prediction

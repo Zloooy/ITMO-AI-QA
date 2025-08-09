@@ -1,6 +1,6 @@
 from config import TELEGRAM_BOT_TOKEN
 from aiogram import Bot, Dispatcher, types
-from ai_itmo_qa.agent import RAG
+from agent import RAG
 
 bot = Bot(token=TELEGRAM_BOT_TOKEN)
 dp = Dispatcher(bot)

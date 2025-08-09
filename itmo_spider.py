@@ -1,8 +1,8 @@
 import scrapy
 from bs4 import BeautifulSoup
 from markdownify import markdownify as md
-from ai_itmo_qa.embeddings import encode_document
-from ai_itmo_qa.data.ydb_adapter import YDBAdapter
+from embeddings import encode_document
+from data.ydb_adapter import YDBAdapter
 from datetime import datetime
 
 
@@ -15,8 +15,10 @@ class ItmoSpider(scrapy.Spider):
         "DEPTH_LIMIT": 3,
     }
 
-    def __init__(self, specialization_source: str = None, *args, **kwargs):
+    def __init__(self, specialization_source: str = None, start_url = None, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        if start_url:
+            self.start_urls = [start_url]
         self.specialization_source = specialization_source
         self.db_adapter = YDBAdapter()
         self.db_adapter.create_table()

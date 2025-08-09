@@ -1,0 +1,12 @@
+aiogram==3.21.0
+beautifulsoup4==4.13.4
+bs4==0.0.2
+dspy==2.6.27
+jwcrypto==1.5.6
+markdownify==1.1.0
+numpy==2.3.2
+polars==1.32.2
+Scrapy==2.13.3
+yandex-cloud-ml-sdk==0.13.1
+yandexcloud==0.354.0
+ydb==3.21.7

@@ -1,8 +1,30 @@
-# ai_itmo_qa Project Structure
+# Структура проекта ai_itmo_qa
 
-This document outlines the directory and file structure of the `ai_itmo_qa` project, providing an overview of its components and their purposes.
+## Запуск
 
-## Directory Structure
+Для корректной работы системы должны быть заданы переменные среды из файла [config.py](./config.py). Необходимо 2 файла - service key для генерации эмбеддингов Yandex GPT и service key для доступа к YDB.
+
+### Парсинг данных
+
+Все данные хранятся в векторном и текстовом виде в базе YDB. Хранилище заполняется запуском следующих команд:
+
+```shell
+scrapy runspider itmo_spider.py -a start_url="https://ai.itmo.ru/" specialization_source="ai_engineer"
+```
+
+```shell
+scrapy runspider itmo_spider.py -a start_url="https://aiproduct.itmo.ru/" specialization_source="ai_product_manager"
+```
+
+### Запуск Telegram-бота
+
+```shell
+python main.py
+```
+
+Этот документ описывает структуру каталогов и файлов проекта `ai_itmo_qa`, предоставляя обзор его компонентов и их назначения.
+
+## Структура каталогов
 
 ```
 ai_itmo_qa/
@@ -19,20 +41,21 @@ ai_itmo_qa/
     └── ydb_adapter.py
 ```
 
-## File and Directory Descriptions
+## Описание файлов и каталогов
 
-*   [`agent.py`](ai_itmo_qa/agent.py): Contains the implementation of the AI agent, likely responsible for orchestrating various tasks and interactions.
-*   [`bot.py`](ai_itmo_qa/bot.py): Implements the core logic for the bot, handling user interactions and responses.
-*   [`config.py`](ai_itmo_qa/config.py): The main configuration file for the project, storing settings and parameters.
-*   [`embeddings.py`](ai_itmo_qa/embeddings.py): Handles the generation and management of text embeddings, crucial for natural language processing tasks.
-*   [`itmo_spider.py`](ai_itmo_qa/itmo_spider.py): A web crawler specifically designed to scrape data from ITMO-related sources.
-*   [`main.py`](ai_itmo_qa/main.py): The primary entry point of the application, coordinating the execution of different modules.
-*   [`tokenizer.json`](ai_itmo_qa/tokenizer.json): A JSON file containing tokenizer configurations, used for processing text data.
-*   [`utils.py`](ai_itmo_qa/utils.py): A collection of utility functions and helper methods used across the project.
+*   [`agent.py`](./agent.py): Содержит реализацию AI-агента, отвечающего за координацию различных задач и взаимодействий.
+*   [`bot.py`](./bot.py): Реализует основную логику бота, обрабатывая взаимодействия с пользователем и ответы.
+*   [`config.py`](./config.py): Основной конфигурационный файл проекта, хранящий учётные данные для подключения к сервисам.
+*   [`embeddings.py`](./embeddings.py): Создание текстовых эмбеддингов.
+*   [`itmo_spider.py`](./itmo_spider.py): Веб-краулер, предназначенный для сбора данных с доменов ИТМО. Точка входа в приложение для парсинга.
+*   [`main.py`](./main.py): Основная точка входа в приложение, координирующая выполнение различных модулей.
+*   [`tokenizer.json`](./tokenizer.json): JSON-файл с конфигурациями токенизатора, используемый для обработки текстовых данных.
+*   [`utils.py`](./utils.py): Набор вспомогательных функций и методов, используемых в проекте.
+*   [`requirements.txt`](./requirements.txt): Зависимости проекта.
 
-### `data/` Directory
+### Каталог `data/`
 
-This directory is intended for storing data-related modules and possibly processed data.
+Этот каталог предназначен для хранения модулей, связанных с данными, и, возможно, обработанных данных.
 
-*   [`__init__.py`](ai_itmo_qa/data/__init__.py): Marks the `data` directory as a Python package.
-*   [`ydb_adapter.py`](ai_itmo_qa/data/ydb_adapter.py): Contains code for adapting and interacting with Yandex Database.
+*   [`__init__.py`](./data/__init__.py): Помечает каталог `data` как Python-пакет.
+*   [`ydb_adapter.py`](./data/ydb_adapter.py): Содержит код для адаптации и взаимодействия с Yandex Database.

@@ -3,7 +3,7 @@ from yandex_cloud_ml_sdk.auth import IAMTokenAuth
 from config import YANDEX_FOLDER_ID, YGPT_SERVICE_ACCOUNT_KEY_FILE_CREDENTIALS, TELEGRAM_BOT_TOKEN
 from utils import get_iam
 from aiogram import Bot, Dispatcher, types, executor
-from ai_itmo_qa.agent import RAG
+from agent import RAG
 
 sdk = YCloudML(
     folder_id=YANDEX_FOLDER_ID,
